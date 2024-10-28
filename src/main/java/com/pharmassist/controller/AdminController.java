@@ -36,7 +36,7 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/admins{adminId}")
+	@GetMapping("/admins/{adminId}")
 	public ResponseEntity<ResponseStructure<AdminResponse>> findAdminById(@PathVariable String adminId){
 		AdminResponse response=adminService.findAdminById(adminId);
 		return responseBuilder.success(HttpStatus.FOUND, "Admin Found", response);
