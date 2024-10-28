@@ -1,11 +1,14 @@
 package com.pharmassist.entity;
 
+import com.pharmassist.config.GenerateCustomId;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class Admin {
 	@Id
+	@GenerateCustomId
 	private String adminId;
 	private String email;
 	private String phoneNumber;
