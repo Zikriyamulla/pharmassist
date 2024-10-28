@@ -13,6 +13,10 @@ import com.pharmassist.util.AppResponseBuilder;
 import com.pharmassist.util.ResponseStructure;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -31,6 +35,14 @@ public class AdminController {
 		 return  responseBuilder.success(HttpStatus.CREATED, "Admin Created", response);
 		
 	}
+	
+	@GetMapping("/admins{adminId}")
+	public ResponseEntity<ResponseStructure<AdminResponse>> findAdminById(@PathVariable String adminId){
+		AdminResponse response=adminService.findAdminById(adminId);
+		return responseBuilder.success(HttpStatus.FOUND, "Admin Found", response);
+		
+	}
+	
 	
 	
 	

@@ -28,6 +28,12 @@ public class AdminService {
 		
 	}
 
+	public AdminResponse findAdminById(String adminId) {
+		
+		return adminRepository.findById(adminId)
+				.map(adminMapper::mapToAdminResponse).orElseThrow(() -> null);
+	}
+
 	
 	
 
