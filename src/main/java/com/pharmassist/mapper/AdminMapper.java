@@ -1,11 +1,13 @@
 package com.pharmassist.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.pharmassist.entity.Admin;
 import com.pharmassist.requestdtos.AdminRequest;
 import com.pharmassist.responsedtos.AdminResponse;
-
+@Component
 public class AdminMapper {
-	public Admin mapToUser(AdminRequest request, Admin admin) {
+	public Admin mapToAdmin(AdminRequest request, Admin admin) {
 		admin.setEmail(request.getEmail());
 		admin.setPassword(request.getPassword());
 		admin.setPhoneNumber(request.getPhoneNumber());
@@ -15,7 +17,7 @@ public class AdminMapper {
 	}
 
 
-	public AdminResponse mapToUserResponse(Admin user) {
+	public AdminResponse mapToAdminResponse(Admin user) {
 		AdminResponse response= new AdminResponse();
 		response.setEmail(user.getEmail());
 		response.setAdminId(user.getAdminId());
