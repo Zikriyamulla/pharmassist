@@ -1,5 +1,7 @@
 package com.pharmassist.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +52,12 @@ public class AdminController {
 		AdminResponse response=adminService.updateAdmin(adminRequest, adminId);
 		return responseBuilder.success(HttpStatus.OK, "Admin Updated", response);
 		
+	}
+	@GetMapping("/allAdmins")
+	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmins(){
+		List<AdminResponse> response= adminService.findAllAdmins();
+		return responseBuilder.success(HttpStatus.FOUND, "Admins Found",response);
+
 	}
 	
 	
