@@ -16,6 +16,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -42,6 +44,14 @@ public class AdminController {
 		return responseBuilder.success(HttpStatus.FOUND, "Admin Found", response);
 		
 	}
+	
+	@PutMapping("admins/{adminId}")
+	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@RequestBody AdminRequest adminRequest,String adminId){
+		AdminResponse response=adminService.updateAdmin(adminRequest, adminId);
+		return responseBuilder.success(HttpStatus.OK, "Admin Updated", response);
+		
+	}
+	
 	
 	
 	
