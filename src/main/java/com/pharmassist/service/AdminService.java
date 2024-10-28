@@ -42,7 +42,7 @@ public class AdminService {
 		return adminRepository.findById(adminId).map(exAdmin ->{
 			adminMapper.mapToAdmin(adminRequest, exAdmin);
 			return adminRepository.save(exAdmin);
-		}).map(adminMapper::mapToAdminResponse).orElseThrow(() -> null);
+		}).map(adminMapper::mapToAdminResponse).orElseThrow(null);
 	}
 
 	

@@ -46,7 +46,7 @@ public class AdminController {
 	}
 	
 	@PutMapping("admins/{adminId}")
-	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@RequestBody AdminRequest adminRequest,String adminId){
+	public ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(@RequestBody AdminRequest adminRequest,@PathVariable String adminId){
 		AdminResponse response=adminService.updateAdmin(adminRequest, adminId);
 		return responseBuilder.success(HttpStatus.OK, "Admin Updated", response);
 		
