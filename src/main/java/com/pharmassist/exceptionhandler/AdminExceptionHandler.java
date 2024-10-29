@@ -23,7 +23,7 @@ public class AdminExceptionHandler {
 		return responseBuilder.error(HttpStatus.NOT_FOUND, ex.getMessage(), "Admin not found by id");
 	}
 	@ExceptionHandler(NoAdminFoundException.class)
-	public <T>ResponseEntity<ErrorStructure<String>> handleNoUserFound(NoAdminFoundException ex){
+	public <T>ResponseEntity<ErrorStructure<String>> handleNoAdminFound(NoAdminFoundException ex){
 		return responseBuilder.error(HttpStatus.NOT_FOUND, ex.getMessage(),"Admins not found in request reiteria");
 		
 	}
