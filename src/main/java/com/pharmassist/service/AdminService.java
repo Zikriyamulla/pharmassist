@@ -45,7 +45,7 @@ public class AdminService {
 		return adminRepository.findById(adminId).map(exAdmin ->{
 			adminMapper.mapToAdmin(adminRequest, exAdmin);
 			return adminRepository.save(exAdmin);
-		}).map(adminMapper::mapToAdminResponse).orElseThrow(()->new AdminNotFoundException("Failed to found"));
+		}).map(adminMapper::mapToAdminResponse).orElseThrow(()->new AdminNotFoundException("Failed to update"));
 	}
 
 	public List<AdminResponse> findAllAdmins() {
