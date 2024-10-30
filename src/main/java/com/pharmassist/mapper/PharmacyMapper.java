@@ -1,9 +1,11 @@
 package com.pharmassist.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.pharmassist.entity.Pharmacy;
 import com.pharmassist.requestdtos.PharmacyRequest;
 import com.pharmassist.responsedtos.PharmacyResponse;
-
+@Component
 public class PharmacyMapper {
 	public Pharmacy mapToPharmacy(PharmacyRequest request, Pharmacy pharmacy) {
 		pharmacy.setName(request.getName());
