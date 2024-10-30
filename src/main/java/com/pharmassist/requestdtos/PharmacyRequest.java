@@ -10,6 +10,7 @@ public class PharmacyRequest {
 	@NotBlank(message="PharmacyName Cannot be blank")
 	@Pattern(regexp = "^[a-zA-Z]+$",message="The PharmacyName must only contain alphabets")
 	private String name;
+	
 	@NotNull(message="Gstno Cannot be Null")
 	@NotBlank(message="Gstno Cannot be blank")
 	 @Pattern(
@@ -17,6 +18,7 @@ public class PharmacyRequest {
 		        message = "Invalid GST number format"
 		    )
 	private String gstNo;
+	
 	@NotNull(message="LicenceNo Cannot be Null")
 	@NotBlank(message="LicenceNo Cannot be blank")
 	   @Pattern(
