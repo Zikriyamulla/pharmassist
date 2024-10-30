@@ -1,15 +1,21 @@
 package com.pharmassist.entity;
 
+import com.pharmassist.config.GenerateCustomId;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
 
 @Entity
 public class Pharmacy {
 	@Id
+	@GenerateCustomId
 	private String pharmacyId;
 	private String name;
 	private String gstNo;
 	private String licenceNo;
+	
+	
 	
 	public String getPharmacyId() {
 		return pharmacyId;

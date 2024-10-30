@@ -13,6 +13,7 @@ public class Admin {
 	private String email;
 	private String phoneNumber;
 	private String password;
+
 	public String getAdminId() {
 		return adminId;
 	}
