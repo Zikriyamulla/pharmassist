@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.pharmassist.entity.Pharmacy;
 import com.pharmassist.exception.AdminNotFoundException;
+import com.pharmassist.exception.PharmacyNotFoundException;
 import com.pharmassist.mapper.PharmacyMapper;
 import com.pharmassist.repository.AdminRepository;
 import com.pharmassist.repository.PharmacyRepository;
@@ -32,6 +33,11 @@ public class PharmacyService {
 		})
 		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()->new AdminNotFoundException(adminId));
 	}
+	public PharmacyResponse findPharmacyById(String pharmacyId) {
+		return pharmacyRepository.findById(pharmacyId) 
+		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundException("Failed to find pharmacy"));
+	}
+	
 	
 	
 

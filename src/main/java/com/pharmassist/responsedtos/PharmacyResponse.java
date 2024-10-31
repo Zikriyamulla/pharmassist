@@ -1,7 +1,7 @@
 package com.pharmassist.responsedtos;
 
 public class PharmacyResponse {
-	
+	private String pharmacyId;
 	private String name;
 	private String gstNo;
 	private String licenceNo;
@@ -24,6 +24,12 @@ public class PharmacyResponse {
 	}
 	public void setLicenceNo(String licenceNo) {
 		this.licenceNo = licenceNo;
+	}
+	public String getPharmacyId() {
+		return pharmacyId;
+	}
+	public void setPharmacyId(String pharmacyId) {
+		this.pharmacyId = pharmacyId;
 	}
 	
 }

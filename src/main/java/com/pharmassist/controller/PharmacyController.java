@@ -3,6 +3,7 @@ package com.pharmassist.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +29,16 @@ public class PharmacyController {
 		this.responseBuilder = responseBuilder;
 	}
 	
-	@PostMapping("/pharmacy/{adminId}")
+	@PostMapping("/admins/{adminId}/pharmacy")
 	public ResponseEntity<ResponseStructure<PharmacyResponse>> savePharmacy(@RequestBody @Valid PharmacyRequest pharmacyRequest, @PathVariable String adminId){
 		PharmacyResponse response=pharmacyService.savePharmacy(pharmacyRequest,adminId);
 		return responseBuilder.success(HttpStatus.CREATED, "Pharmacy created", response);
+		
+	}
+	@GetMapping("/pharmacy/{pharmacyId}")
+	public ResponseEntity<ResponseStructure<PharmacyResponse>> findPharmacyById(@PathVariable String pharmacyId){
+	PharmacyResponse response=pharmacyService.findPharmacyById(pharmacyId);
+	return responseBuilder.success(HttpStatus.FOUND, "Pharmacy founded", response);
 		
 	}
 	

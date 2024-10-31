@@ -15,6 +15,7 @@ public class PharmacyMapper {
 	}
 	public PharmacyResponse mapToPharmacyResponse(Pharmacy pharmacy) {
 		PharmacyResponse response=new PharmacyResponse();
+		response.setPharmacyId(pharmacy.getPharmacyId());
 		response.setName(pharmacy.getName());
 		response.setGstNo(pharmacy.getGstNo());
 		response.setLicenceNo(pharmacy.getLicenceNo());
