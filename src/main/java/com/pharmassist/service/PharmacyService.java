@@ -1,5 +1,7 @@
 package com.pharmassist.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,9 @@ public class PharmacyService {
 	public PharmacyResponse findPharmacyById(String pharmacyId) {
 		return pharmacyRepository.findById(pharmacyId) 
 		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundException("Failed to find pharmacy"));
+	}
+	public List<PharmacyResponse> findAllPharmacy() {
+		return pharmacyRepository.findAll().stream().map(pharmacyMapper::mapToPharmacyResponse).toList();
 	}
 	
 	
