@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.pharmassist.entity.Admin;
 import com.pharmassist.entity.Pharmacy;
 import com.pharmassist.exception.AdminNotFoundException;
 import com.pharmassist.exception.PharmacyNotFoundException;
@@ -35,13 +36,32 @@ public class PharmacyService {
 		})
 		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()->new AdminNotFoundException(adminId));
 	}
-	public PharmacyResponse findPharmacyById(String pharmacyId) {
-		return pharmacyRepository.findById(pharmacyId) 
-		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundException("Failed to find pharmacy"));
-	}
+
 	public List<PharmacyResponse> findAllPharmacy() {
 		return pharmacyRepository.findAll().stream().map(pharmacyMapper::mapToPharmacyResponse).toList();
 	}
+	
+	
+	
+	
+	
+	public PharmacyResponse findPharmacyById(String adminId) {
+	
+		
+				 return adminRepository.findById(adminId)
+					        .map(admin -> {
+					            Pharmacy pharmacy = admin.getPharmacy();
+					            return pharmacy != null 
+					                ? pharmacyMapper.mapToPharmacyResponse(pharmacy) 
+					                :throwPharmacyNoFound();
+					        })
+					        .orElseThrow(() -> new PharmacyNotFoundException("No pharmacy found due to admin not present"));
+		
+	}
+	public static PharmacyResponse throwPharmacyNoFound() {
+		throw new PharmacyNotFoundException("No pharmacy found due to admin not having an associated pharmacy");
+	}
+	
 	
 	
 	
