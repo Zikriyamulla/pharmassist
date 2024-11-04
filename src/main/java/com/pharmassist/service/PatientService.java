@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.pharmassist.entity.Patient;
 import com.pharmassist.entity.Pharmacy;
 import com.pharmassist.exception.NoPatientFoundException;
+import com.pharmassist.exception.PatientNotFoundByIdException;
 import com.pharmassist.exception.PharmacyNotFoundByIdException;
 import com.pharmassist.mapper.PatientMapper;
 import com.pharmassist.repository.PatientRepository;
@@ -48,6 +49,14 @@ public class PatientService {
 		return patients.stream()
 				.map(patientMapper::mapToPatientResponse)
 				.toList();
+	}
+	public PatientResponse updatePatient(PatientRequest patientRequest, String patientId) {
+		
+		return patientRepository.findById(patientId).map((patient)->{
+			patient = patientRepository.save(patientMapper.mapToPatient(patientRequest, patient));
+			return patientMapper.mapToPatientResponse(patient);
+		})
+		.orElseThrow(()-> new PatientNotFoundByIdException("Failed to update Patient By Id"));
 	}
 	
 	
