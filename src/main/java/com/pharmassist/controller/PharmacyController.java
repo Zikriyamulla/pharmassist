@@ -51,6 +51,11 @@ public class PharmacyController {
 	return  responseBuilder.success(HttpStatus.FOUND, "Pharmacy founded", response);
 	}
 	
+	public ResponseEntity<ResponseStructure<PharmacyResponse>> updatePharmacyById(@RequestBody PharmacyRequest pharmacyRequest, @PathVariable String pharmacyId){
+	PharmacyResponse response=pharmacyService.updatePharmacyById(pharmacyRequest,pharmacyId);
+	return responseBuilder.success(HttpStatus.OK, "Pharmacy updated", response);
+		
+	}
 	
 	
 	

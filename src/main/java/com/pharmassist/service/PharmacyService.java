@@ -61,6 +61,12 @@ public class PharmacyService {
 	public static PharmacyResponse throwPharmacyNoFound() {
 		throw new PharmacyNotFoundException("No pharmacy found due to admin not having an associated pharmacy");
 	}
+	public PharmacyResponse updatePharmacyById(PharmacyRequest pharmacyRequest, String pharmacyId) {
+		return pharmacyRepository.findById(pharmacyId).map(exPharmacy->{
+			pharmacyMapper.mapToPharmacy(pharmacyRequest,exPharmacy);
+			return pharmacyRepository.save(exPharmacy);
+		}).map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundException("Failed to update the pharmacy"));
+	}
 	
 	
 	
