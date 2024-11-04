@@ -1,12 +1,14 @@
 package com.pharmassist.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.pharmassist.entity.Patient;
 
 import com.pharmassist.requestdtos.PatientRequest;
 
 import com.pharmassist.responsedtos.PatientResponse;
 
-
+@Component
 public class PatientMapper {
 	public Patient mapToPatient(PatientRequest request, Patient patient) {
 		patient.setName(request.getName());
