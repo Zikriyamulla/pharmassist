@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.pharmassist.entity.Admin;
-import com.pharmassist.exception.AdminNotFoundException;
+import com.pharmassist.exception.AdminNotFoundByIdException;
 import com.pharmassist.mapper.AdminMapper;
 import com.pharmassist.repository.AdminRepository;
 import com.pharmassist.requestdtos.AdminRequest;
@@ -35,7 +35,7 @@ public class AdminService {
 	public AdminResponse findAdminById(String adminId) {
 		
 		return adminRepository.findById(adminId)
-				.map(adminMapper::mapToAdminResponse).orElseThrow(() ->new AdminNotFoundException("Failed to found"));
+				.map(adminMapper::mapToAdminResponse).orElseThrow(() ->new AdminNotFoundByIdException("Failed to found"));
 	}
 
 	
@@ -46,7 +46,7 @@ public class AdminService {
 		return adminRepository.findById(adminId).map(exAdmin ->{
 			adminMapper.mapToAdmin(adminRequest, exAdmin);
 			return adminRepository.save(exAdmin);
-		}).map(adminMapper::mapToAdminResponse).orElseThrow(()->new AdminNotFoundException("Failed to update"));
+		}).map(adminMapper::mapToAdminResponse).orElseThrow(()->new AdminNotFoundByIdException("Failed to update"));
 	}
 
 	public List<AdminResponse> findAllAdmins() {

@@ -1,11 +1,11 @@
 package com.pharmassist.exception;
 
 @SuppressWarnings("serial")
-public class AdminNotFoundException extends RuntimeException{
+public class AdminNotFoundByIdException extends RuntimeException{
 	
 	private final String message;
 
-	public AdminNotFoundException(String message) {
+	public AdminNotFoundByIdException(String message) {
 		super();
 		this.message = message;
 	}

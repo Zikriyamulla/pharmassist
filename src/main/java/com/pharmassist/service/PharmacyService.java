@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.pharmassist.entity.Admin;
 import com.pharmassist.entity.Pharmacy;
-import com.pharmassist.exception.AdminNotFoundException;
+import com.pharmassist.exception.AdminNotFoundByIdException;
 import com.pharmassist.exception.PharmacyNotFoundByIdException;
-import com.pharmassist.exception.PharmacyNotFoundException;
 import com.pharmassist.mapper.PharmacyMapper;
 import com.pharmassist.repository.AdminRepository;
 import com.pharmassist.repository.PharmacyRepository;
@@ -35,7 +34,7 @@ public class PharmacyService {
 			 adminRepository.save(admin);
 			 return pharmacy;	 
 		})
-		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()->new AdminNotFoundException(adminId));
+		.map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()->new AdminNotFoundByIdException(adminId));
 	}
 
 	public List<PharmacyResponse> findAllPharmacy() {
@@ -43,49 +42,18 @@ public class PharmacyService {
 	}
 	
 	
-	
-	
-	
-//	public PharmacyResponse findPharmacyById(String adminId) {
-//	
-//		
-//				 return adminRepository.findById(adminId)
-//					        .map(admin -> {
-//					            Pharmacy pharmacy = admin.getPharmacy();
-//					            return pharmacy != null 
-//					                ? pharmacyMapper.mapToPharmacyResponse(pharmacy) 
-//					                :throwPharmacyNoFound();
-//					        })
-//					        .orElseThrow(() -> new PharmacyNotFoundException("No pharmacy found due to admin not present"));
-//		
-//	}
-//	public static PharmacyResponse throwPharmacyNoFound() {
-//		throw new PharmacyNotFoundException("No pharmacy found due to admin not having an associated pharmacy");
-//	}
-	
 	public PharmacyResponse findPharmacy(String adminId) {
 		return adminRepository.findPharmacyByAdminId(adminId)
 						.map(pharmacyMapper::mapToPharmacyResponse)
 						.orElseThrow(()-> new PharmacyNotFoundByIdException("Failed to find Pharmacy"));
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public PharmacyResponse updatePharmacyById(PharmacyRequest pharmacyRequest, String pharmacyId) {
 		return pharmacyRepository.findById(pharmacyId).map(exPharmacy->{
 			pharmacyMapper.mapToPharmacy(pharmacyRequest,exPharmacy);
 			return pharmacyRepository.save(exPharmacy);
-		}).map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundException("Failed to update the pharmacy"));
+		}).map(pharmacyMapper::mapToPharmacyResponse).orElseThrow(()-> new PharmacyNotFoundByIdException("Failed to update the pharmacy"));
 	}
 	
 	
