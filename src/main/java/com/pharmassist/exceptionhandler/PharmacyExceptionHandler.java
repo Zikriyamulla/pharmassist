@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 import com.pharmassist.exception.NoPharmacyFoundException;
+import com.pharmassist.exception.PharmacyNotFoundByIdException;
 import com.pharmassist.exception.PharmacyNotFoundException;
 import com.pharmassist.util.AppResponseBuilder;
 import com.pharmassist.util.ErrorStructure;
@@ -29,6 +30,9 @@ public class PharmacyExceptionHandler {
 		return responseBuilder.error(HttpStatus.NOT_FOUND, ex.getMessage(),"Pharmacies not found in request creiteria");
 		
 	}
-	
+	@ExceptionHandler(PharmacyNotFoundByIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handlePharmacyNotFoundByIdException(PharmacyNotFoundByIdException ex){
+		return responseBuilder.error(HttpStatus.NOT_FOUND, ex.getMessage(), "Pharmacy not found by Id");
+	}
 
 }

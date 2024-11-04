@@ -4,6 +4,9 @@ import com.pharmassist.config.GenerateCustomId;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -14,9 +17,11 @@ public class Pharmacy {
 	private String name;
 	private String gstNo;
 	private String licenceNo;
-	
-	
-	
+
+	@OneToOne(mappedBy = "pharmacy")	   
+	private Admin admin;
+
+
 	public String getPharmacyId() {
 		return pharmacyId;
 	}
@@ -25,6 +30,12 @@ public class Pharmacy {
 	}
 	public String getName() {
 		return name;
+	}
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -41,8 +52,9 @@ public class Pharmacy {
 	public void setLicenceNo(String licenceNo) {
 		this.licenceNo = licenceNo;
 	}
-	
-	
-	
+
+
+
+
 
 }

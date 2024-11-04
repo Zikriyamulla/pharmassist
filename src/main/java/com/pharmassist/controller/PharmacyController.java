@@ -38,9 +38,9 @@ public class PharmacyController {
 		return responseBuilder.success(HttpStatus.CREATED, "Pharmacy created", response);
 		
 	}
-	@GetMapping("/pharmacy/{adminId}")
-	public ResponseEntity<ResponseStructure<PharmacyResponse>> findPharmacyById(@PathVariable String adminId){
-	PharmacyResponse response=pharmacyService.findPharmacyById(adminId);
+	@GetMapping("/admins/{adminId}/pharmacy")
+	public ResponseEntity<ResponseStructure<PharmacyResponse>> findPharmacy(@PathVariable String adminId){
+	PharmacyResponse response=pharmacyService.findPharmacy(adminId);
 	return responseBuilder.success(HttpStatus.FOUND, "Pharmacy founded", response);
 		
 	}
