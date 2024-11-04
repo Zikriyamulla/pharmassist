@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import com.pharmassist.enums.Gender;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,12 +28,9 @@ public class PatientRequest {
 			, message="Invalid Gmail Id")
 	private String email;
 	
-	@NotBlank(message="Gender Cannot be blank")
-	@NotNull(message="Gender Cannot be null")
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	@NotBlank(message="DateOfBirth Cannot be blank")
-	@NotNull(message="DateOfBirth Cannot be null")
 	private LocalDate dateOfBirth;
 	
 	public String getName() {
