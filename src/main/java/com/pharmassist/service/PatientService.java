@@ -1,10 +1,13 @@
 package com.pharmassist.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.pharmassist.entity.Patient;
+import com.pharmassist.entity.Pharmacy;
+import com.pharmassist.exception.NoPatientFoundException;
 import com.pharmassist.exception.PharmacyNotFoundByIdException;
 import com.pharmassist.mapper.PatientMapper;
 import com.pharmassist.repository.PatientRepository;
@@ -31,13 +34,22 @@ public class PatientService {
 			patient.setPharmacy(pharmacy);
 			
 			if(pharmacy.getPatients()==null)
-				pharmacy.setPatients(new ArrayList());
+				pharmacy.setPatients(new ArrayList<>());
 			
 			pharmacy.getPatients().add(patient);
 			patient = patientRepository.save(patient);
 			return patientMapper.mapToPatientResponse(patient);
 		}).orElseThrow(()-> new PharmacyNotFoundByIdException("Failed to add patients due to No Pharmacy Found with id: "+pharmacyId));
 	}
+	public List<PatientResponse> findAllPatientsByPharmacy(String pharmacyId) {
+		List<Patient> patients = patientRepository.findPatientsByPharmacy(pharmacyId);
+		if(patients.isEmpty())
+			throw new NoPatientFoundException("Failed to find all Pharmacy");
+		return patients.stream()
+				.map(patientMapper::mapToPatientResponse)
+				.toList();
+	}
+	
 	
 	
 
