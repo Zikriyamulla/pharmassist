@@ -6,18 +6,55 @@ import com.pharmassist.enums.Forms;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class MedicineRequest {
+	@NotNull(message="MedicineName Cannot be Null")
+	@NotBlank(message="MedicineName Cannot be blank")
+	@Pattern(regexp = "^[a-zA-Z]+$",message="The PharmacyName must only contain alphabets")
 	private String name;
+	
+	@NotNull(message="Category Cannot be Null")
+	 @NotBlank(message = "Category cannot be blank")
+	    @Pattern(regexp = "^[A-Za-z\\s]+$", message = "Category must contain only letters and spaces")
 	private String category;
+	
+	@NotNull(message="Ingredients Cannot be Null")
+	@NotBlank(message = "Ingredients cannot be blank")
+    @Pattern(regexp = "^[A-Za-z0-9,\\s]+$", message = "Ingredients must contain only letters, numbers, commas, and spaces")
 	private String ingredients;
+	
+	@NotNull(message="Dosage Cannot be Null")
+	@NotBlank(message = "Dosage cannot be blank")
+    @Min(value = 1, message = "Dosage must be at least 1 mg")
 	private int dossageInMg;
+	@NotNull(message="Forms Cannot be Null")
 	@Enumerated(EnumType.STRING)
 	private Forms forms;
-	private String manufacture;
-	private int stockQuantity;
-	private LocalDate expireDate;
-	private double price;
+	
+	@NotNull(message="Manufacture Cannot be Null")
+	 @NotBlank(message = "Manufacture name cannot be blank")
+	    @Pattern(regexp = "^[A-Za-z0-9\\s]+$", message = "Manufacture name must contain only letters, numbers, and spaces")
+	    private String manufacture;
+
+	 @NotBlank(message = "Stock quantity cannot be blank")
+	    @NotNull(message = "Stock quantity cannot be null")
+	    @Min(value = 0, message = "Stock quantity cannot be negative")
+	    private int stockQuantity;
+	 @NotBlank(message = "Expiration date cannot be blank")
+	    @NotNull(message = "Expiration date cannot be null")
+	    @Future(message = "Expiration date must be in the future")
+	    private LocalDate expireDate;
+
+	 @NotBlank(message = "Price cannot be blank")
+	    @NotNull(message = "Price cannot be null")
+	    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
+	    private double price;
 	public String getName() {
 		return name;
 	}
