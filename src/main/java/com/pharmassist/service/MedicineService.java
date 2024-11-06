@@ -19,10 +19,12 @@ import com.pharmassist.enums.Forms;
 import com.pharmassist.exception.PharmacyNotFoundByIdException;
 import com.pharmassist.repository.MedicineRepository;
 import com.pharmassist.repository.PharmacyRepository;
+import com.pharmassist.responsedtos.MedicineResponse;
 @Service
 public class MedicineService {
 	private final MedicineRepository medicineRepository ;
 	private final PharmacyRepository pharmacyRepository;
+	
 
 	public MedicineService(MedicineRepository medicineRepository, PharmacyRepository pharmacyRepository) {
 		super();
@@ -76,5 +78,7 @@ public class MedicineService {
 		return "Uploaded " + medicines.size() + " medicines successfully!";
 
 	}
+
+	  
 	
 }
