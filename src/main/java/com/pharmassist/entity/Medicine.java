@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Medicine {
@@ -25,6 +26,17 @@ public class Medicine {
 	private int stockQuantity;
 	private LocalDate expireDate;
 	private double price;
+	
+	@ManyToOne
+	private Pharmacy pharmacy;
+	
+	
+	public Pharmacy getPharmacy() {
+		return pharmacy;
+	}
+	public void setPharmacy(Pharmacy pharmacy) {
+		this.pharmacy = pharmacy;
+	}
 	public String getMedicineId() {
 		return medicineId;
 	}
@@ -85,5 +97,14 @@ public class Medicine {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	@Override
+	public String toString() {
+		return "Medicine [medicineId=" + medicineId + ", name=" + name + ", category=" + category + ", ingredients="
+				+ ingredients + ", dossageInMg=" + dossageInMg + ", forms=" + forms + ", manufacture=" + manufacture
+				+ ", stockQuantity=" + stockQuantity + ", expireDate=" + expireDate + ", price=" + price + ", pharmacy="
+				+ pharmacy + "]";
+	}
 
+	
+	
 }
