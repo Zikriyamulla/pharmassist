@@ -1,9 +1,11 @@
 package com.pharmassist.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.pharmassist.entity.Medicine;
 import com.pharmassist.requestdtos.MedicineRequest;
 import com.pharmassist.responsedtos.MedicineResponse;
-
+@Component
 public class MedicineMapper {
 	
 	public Medicine mapToMedicine(MedicineRequest request, Medicine medicine) {
@@ -21,6 +23,7 @@ public class MedicineMapper {
 	}
 	
 	public MedicineResponse mapToMedicineResponse(Medicine medicine) {
+		
 		MedicineResponse response = new MedicineResponse();
 		response.setMedicineId(medicine.getMedicineId());
 		response.setName(medicine.getName());
