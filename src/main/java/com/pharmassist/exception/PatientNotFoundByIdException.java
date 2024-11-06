@@ -1,13 +1,17 @@
 package com.pharmassist.exception;
 
 @SuppressWarnings("serial")
-public class PharmacyNotFoundException extends RuntimeException {
+public class PatientNotFoundByIdException extends RuntimeException{
 	private final String message;
 
-	public PharmacyNotFoundException(String message) {
+	
+
+	public PatientNotFoundByIdException(String message) {
 		super();
 		this.message = message;
 	}
+
+
 
 	public String getMessage() {
 		return message;
