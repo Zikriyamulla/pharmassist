@@ -7,6 +7,7 @@ import com.pharmassist.enums.TransactionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Transaction {
@@ -15,6 +16,26 @@ public class Transaction {
 	private TransactionType transactionType;
 	private LocalDateTime dataTime;
 	private int quantity;
+	
+	@OneToMany
+	private Pharmacy pharmacy;
+	@OneToMany
+	private Medicine medicine;
+	
+	
+	
+	public Pharmacy getPharmacy() {
+		return pharmacy;
+	}
+	public void setPharmacy(Pharmacy pharmacy) {
+		this.pharmacy = pharmacy;
+	}
+	public Medicine getMedicine() {
+		return medicine;
+	}
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
+	}
 	public String getTransactionId() {
 		return transactionId;
 	}
