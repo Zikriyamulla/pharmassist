@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 public class AdminRequest {
 	@NotBlank(message="Email Cannot be blank")
 	@NotNull(message="Email Cannot be null")
-	@Pattern(regexp = "^[a-zA-Z\\._%+-]+@gmail\\.com$"
+	@Pattern(regexp = "^[a-zA-Z]+@gmail\\.com$"
 			, message="Invalid Gmail Id")
 	private String email;
 	

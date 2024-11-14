@@ -33,7 +33,7 @@ public class AdminController {
 		this.adminService = adminService;
 		this.responseBuilder = responseBuilder;
 	}
-	@PostMapping("/admins")
+	@PostMapping("/register")
 	public ResponseEntity<ResponseStructure<AdminResponse>> saveAdmin(@RequestBody @Valid AdminRequest adminRequest){
 		 AdminResponse response=adminService.saveAdmin(adminRequest);
 		 return  responseBuilder.success(HttpStatus.CREATED, "Admin Created", response);
