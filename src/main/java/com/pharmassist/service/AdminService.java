@@ -2,7 +2,7 @@ package com.pharmassist.service;
 
 import java.util.List;
 
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pharmassist.entity.Admin;
@@ -19,11 +19,13 @@ import com.pharmassist.responsedtos.AdminResponse;
 public class AdminService {
 	private final AdminRepository adminRepository;
 	private final AdminMapper adminMapper;
+	private final PasswordEncoder passwordEncoder;
 	
-	public AdminService(AdminRepository adminRepository,AdminMapper adminMapper) {
+	public AdminService(AdminRepository adminRepository,AdminMapper adminMapper, PasswordEncoder passwordEncoder) {
 		super();
 		this.adminRepository = adminRepository;
 		this.adminMapper = adminMapper;
+		this.passwordEncoder = passwordEncoder;
 	
 	}
 
