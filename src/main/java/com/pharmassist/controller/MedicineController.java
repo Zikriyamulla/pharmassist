@@ -28,15 +28,15 @@ public class MedicineController {
 		this.medicineService = medicineService;
 		this.responseBuilder = responseBuilder;
 	}
-	@PostMapping("/pharmacy/{pharmacyId}/medicines")
+	@PostMapping("/pharmacy/{pharmacyId}/medicines/upload")
 	public ResponseEntity<SimpleResponseStructure> uploadMedicines(@RequestParam MultipartFile file,@PathVariable String pharmacyId){
 		String medicines =medicineService.uploadMedicines(file,pharmacyId);
 		return responseBuilder.success(HttpStatus.CREATED,medicines);
 
 	}
-	@GetMapping("/medicines/{input}")
-	public ResponseEntity<ResponseStructure<List<MedicineResponse>>> findMedicineByNameOrIngredient(@PathVariable String input){
-		List<MedicineResponse> response = medicineService.findMedicineByNameOrIngredient(input);
+	@GetMapping("/medicines/{name}/{ingredient}")
+	public ResponseEntity<ResponseStructure<List<MedicineResponse>>> findMedicineByNameLikeIgnoreCaseOrIngredientsLikeIgnoreCase(@PathVariable String name,@PathVariable String ingredient){
+		List<MedicineResponse> response = medicineService.findMedicineByNameLikeIgnoreCaseOrIngredientsLikeIgnoreCase(name,ingredient);
 		return responseBuilder.success(HttpStatus.FOUND, "Medicine is Founded", response);
 
 	}

@@ -11,8 +11,9 @@ import com.pharmassist.entity.Medicine;
 
 
 public interface MedicineRepository extends JpaRepository<Medicine, String>{
-	 @Query("SELECT m FROM Medicine m WHERE m.name = :input OR m.ingredients LIKE %:input%")
-	   public  List<Medicine> findMedicineByNameOrIngredient(@Param("input") String input);
+	
+
+	public List<Medicine> findMedicineByNameLikeIgnoreCaseOrIngredientsLikeIgnoreCase(String name, String ingredient);
 	 
 	
 

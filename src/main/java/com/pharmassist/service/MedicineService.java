@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pharmassist.entity.Medicine;
 import com.pharmassist.entity.Pharmacy;
 import com.pharmassist.enums.Forms;
+import com.pharmassist.exception.NoMedicineFoundException;
 import com.pharmassist.exception.PharmacyNotFoundByIdException;
 import com.pharmassist.mapper.MedicineMapper;
 import com.pharmassist.repository.MedicineRepository;
@@ -81,10 +82,13 @@ public class MedicineService {
 
 	}
 
-	public List<MedicineResponse> findMedicineByNameOrIngredient(String input) {
-		List<Medicine> medicines = medicineRepository.findMedicineByNameOrIngredient(input);
+
+
+	public List<MedicineResponse> findMedicineByNameLikeIgnoreCaseOrIngredientsLikeIgnoreCase(String name,
+			String ingredient) {
+		List<Medicine> medicines = medicineRepository.findMedicineByNameLikeIgnoreCaseOrIngredientsLikeIgnoreCase(name,ingredient);
 		if(medicines.isEmpty()) {
-			throw null;
+			throw new NoMedicineFoundException("No medicines found with input: "+name+" or "+ingredient);
 		}
 		return medicines.stream()
 				.map(medicineMapper:: mapToMedicineResponse)
